@@ -1,11 +1,9 @@
-package ua.lpnu.yana.apilab.model;
+package ua.lpnu.yana.apilab;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-
-import ua.lpnu.yana.apilab.model.cards.Cards;
 
 public class Feed {
 

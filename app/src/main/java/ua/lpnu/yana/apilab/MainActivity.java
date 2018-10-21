@@ -3,7 +3,6 @@ package ua.lpnu.yana.apilab;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -13,8 +12,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ua.lpnu.yana.apilab.model.Feed;
-import ua.lpnu.yana.apilab.model.cards.Cards;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Button btnGetData = (Button) findViewById(R.id.btnGetData);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -47,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d(TAG, "id: " + card.getId()+ "\n" +
                                     "name: " + card.getName()+ "\n" +
-                                    "--------------------------------------------------------\n\n");
+                                    "image: " + card.getImageUrlHiRes()+ "\n" +
+                                    "number: " + card.getNationalPokedexNumber()+ "\n" +
+                                    "_____________________________\n\n");
                 }
             }
 
