@@ -1,24 +1,19 @@
 package ua.lpnu.yana.apilab;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Cards {
 
     @SerializedName("id")
-    @Expose
     private String id;
 
     @SerializedName("name")
-    @Expose
     private String name;
 
     @SerializedName("imageUrlHiRes")
-    @Expose
     private String imageUrlHiRes;
 
     @SerializedName("nationalPokedexNumber")
-    @Expose
     private String nationalPokedexNumber;
 
     public String getId() {
