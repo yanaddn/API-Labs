@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Adapter adapter = new Adapter();
-        adapter.makeRequest();
+        ApplicationEx applicationEx = (ApplicationEx) getApplication();
+        applicationEx.getPokemonAPI().getData().enqueue(new Adapter());
     }
 }
