@@ -9,20 +9,22 @@ public class Feed {
 
     @SerializedName("cards")
     @Expose
-    private ArrayList<Cards> cards;
+    private ArrayList<Card> cards;
 
-    public ArrayList<Cards> getCards() {
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<Cards> cards) {
+    public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
     }
 
+    /*
     @Override
     public String toString() {
         return "Feed{" +
                 "cards=" + cards +
                 '}';
     }
+    */
 }

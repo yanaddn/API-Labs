@@ -6,7 +6,6 @@ import retrofit2.http.Headers;
 
 public interface PokemonAPI {
 
-    @Headers("Content-Type: application/json")
-    @GET("cards")
-    Call<Feed> getData();
+    @GET("https://api.pokemontcg.io/v1/cards")
+    Call<Feed>showData();
 }
