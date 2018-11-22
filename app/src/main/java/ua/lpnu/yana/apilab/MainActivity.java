@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         retrofitInstance();
         showCards();
-        Log.d("TAG", "ABC" + Integer.toString(mCards.size()));
         initRecyclerView();
         initRefreshLayout();
     }
@@ -66,16 +65,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 recyclerViewAdapter.clearData();
                 mCards.clear();
-                Log.d("TAG", "onResponse: received information: " + response.body().toString());
-
                 Feed example = response.body();
                 if (response.body() != null) {
                     List<Card> cardList = example.getCards();
                     mCards.addAll(cardList);
-                    Log.d("TAG", "showCards():" + Integer.toString(mCards.size()));
-                    for (Card card : mCards){
-                        Log.d("f","card"+ card.getId());
-                    }
                     recyclerViewAdapter.addAll(mCards);
                     swipeContainer.setRefreshing(false);
                 }
