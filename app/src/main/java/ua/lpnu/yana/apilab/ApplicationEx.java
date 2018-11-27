@@ -9,7 +9,7 @@ public class ApplicationEx extends Application {
 
     private static final String BASE_URL = "https://api.pokemontcg.io/v1/";
 
-    private Retrofit getRetrofitInstance() {
+    public Retrofit getRetrofitInstance() {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

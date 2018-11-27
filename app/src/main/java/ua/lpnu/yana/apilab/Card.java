@@ -2,7 +2,7 @@ package ua.lpnu.yana.apilab;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Cards {
+public class Card {
 
     @SerializedName("id")
     private String id;
@@ -10,8 +10,8 @@ public class Cards {
     @SerializedName("name")
     private String name;
 
-    @SerializedName("imageUrlHiRes")
-    private String imageUrlHiRes;
+    @SerializedName("imageUrl")
+    private String imageUrl;
 
     @SerializedName("nationalPokedexNumber")
     private String nationalPokedexNumber;
@@ -32,12 +32,12 @@ public class Cards {
         this.name = name;
     }
 
-    public String getImageUrlHiRes() {
-        return imageUrlHiRes;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageUrlHiRes(String imageURL) {
-        this.imageUrlHiRes = imageURL;
+    public void setImageUrl(String imageURL) {
+        this.imageUrl = imageURL;
     }
 
     public String getNationalPokedexNumber() {
@@ -47,14 +47,5 @@ public class Cards {
     public void setNationalPokedexNumber(String nationalPokedexNumber) {
         this.nationalPokedexNumber = nationalPokedexNumber;
     }
-
-    @Override
-    public String toString() {
-        return "Cards{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", imageURL='" + imageUrlHiRes + '\'' +
-                ", number='" + nationalPokedexNumber + '\'' +
-                '}';
-    }
 }
+
