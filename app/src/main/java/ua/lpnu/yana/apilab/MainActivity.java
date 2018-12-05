@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
         ButterKnife.bind(this);
-        setFragment(new ListFragment(), false);
+        // setFragment(new ListFragment(), false);
     }
-
+/*
     public void setFragment(final Fragment fragment, final boolean addToBackStack) {
         final FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()
@@ -40,80 +40,5 @@ public class MainActivity extends AppCompatActivity {
         }
         transaction.commit();
     }
+    */
 }
-
-/*
-
-public class MainActivity extends AppCompatActivity {
-
-    private PokemonAPI pokemonAPI;
-    private Call<Feed> call;
-    private SwipeRefreshLayout swipeContainer;
-    private RecyclerViewAdapter recyclerViewAdapter;
-    private ArrayList<Card> mCards = new ArrayList<>();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view);
-
-        retrofitInstance();
-        showCards();
-        initRecyclerView();
-        initRefreshLayout();
-    }
-
-    private void retrofitInstance() {
-        Log.d("TAG", "init retrofit");
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.pokemontcg.io")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-        pokemonAPI = retrofit.create(PokemonAPI.class);
-    }
-
-
-    private void initRefreshLayout() {
-        swipeContainer = findViewById(R.id.swipe_layout);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                retrofitInstance();
-                showCards();
-            }
-        });
-    }
-
-    private void showCards() {
-        call = pokemonAPI.showData();
-        call.enqueue(new Callback<Feed>() {
-
-            @Override
-            public void onResponse(Call<Feed> call, Response<Feed> response) {
-                recyclerViewAdapter.clearData();
-                mCards.clear();
-                Feed example = response.body();
-                if (response.body() != null) {
-                    List<Card> cardList = example.getCards();
-                    mCards.addAll(cardList);
-                    recyclerViewAdapter.addAll(mCards);
-                    swipeContainer.setRefreshing(false);
-                }
-            }
-
-            @Override
-            public void onFailure (@NonNull Call < Feed > call, @NonNull Throwable t){
-                Log.e("onFailure", t.getMessage());
-            }
-        });
-    }
-
-    private void initRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerViewAdapter = new RecyclerViewAdapter(mCards);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-}
-
-*/

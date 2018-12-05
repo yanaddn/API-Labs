@@ -33,6 +33,8 @@ public class ListFragment extends Fragment {
     Button moveToFav;
     PokemonAdapter adapter;
 
+    /*
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class ListFragment extends Fragment {
             });
         }
 
-        moveToFav.setOnClickListener(new View.OnClickListener() {
+         moveToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity) view.getContext())
@@ -103,4 +105,6 @@ public class ListFragment extends Fragment {
         adapter.loadData(data);
         swipeContainer.setRefreshing(false);
     }
+
+    */
 }
