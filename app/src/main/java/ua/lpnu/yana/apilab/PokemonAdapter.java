@@ -1,5 +1,6 @@
 package ua.lpnu.yana.apilab;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -38,7 +39,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder>{
         return new PokemonViewHolder(view);
     }
 
-    public final void onBindViewHolder(@NonNull PokemonViewHolder holder, final int position) {
+    public final void onBindViewHolder(@NonNull PokemonViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         //final ContactsContract.Contacts.Data card = cards.get(position).showData();
         Picasso.get().load(cards.get(position).getImageUrl()).into(holder.image);
         holder.title.setText(cards.get(position).getId());
