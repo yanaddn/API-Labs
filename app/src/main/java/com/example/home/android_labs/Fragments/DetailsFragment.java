@@ -1,6 +1,5 @@
 package com.example.home.android_labs.Fragments;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,21 +11,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.home.android_labs.Entity.Card;
+import com.example.home.android_labs.Presenters.DetailsPresenter;
+import com.example.home.android_labs.Presenters.DetailsPresenterImpl;
 import com.example.home.android_labs.R;
-import com.google.gson.Gson;
+import com.example.home.android_labs.Views.DetailsView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import static com.example.home.android_labs.MainActivity.DETAILS;
-import static com.example.home.android_labs.MainActivity.FAVOURITES;
 
-public class DetailsFragment extends Fragment {
-    public static final int H = 1150;
-    private Card cards;
+import static com.example.home.android_labs.ApplicationEx.HEIGHT;
+
+public class DetailsFragment extends Fragment implements DetailsView {
+
     private boolean isImageFitToScreen;
-    private SharedPreferences mPrefs;
-    private Bundle bundle;
+    private DetailsPresenter presenter;
 
     @BindView(R.id.image_details)
     ImageView imageView;
@@ -44,10 +43,7 @@ public class DetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_details, container, false);
         ButterKnife.bind(this, view);
-        bundle = this.getArguments();
-        getIncomingFragment();
-        setItems();
-        isFavourite();
+        presenter = new DetailsPresenterImpl(this);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,23 +55,40 @@ public class DetailsFragment extends Fragment {
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                favouritesHandler();
+                presenter.checkFavourite(getActivity());
             }
         });
         return view;
     }
 
-    private void setItems() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getData(getActivity());
+    }
+
+    @Override
+    public void setItems(Card cards) {
         Picasso.get().load(cards.getImageUrl()).into(imageView);
         user.setText(cards.getName());
         tags.setText(cards.getId());
         type.setText(cards.getNationalPokedexNumber());
-        mPrefs = getActivity().getSharedPreferences(FAVOURITES, Context.MODE_PRIVATE);
     }
 
-    private void getIncomingFragment() {
-        if (bundle != null) {
-            cards = new Gson().fromJson(bundle.getString(DETAILS), Card.class);
+    @Override
+    public void addToFavourite() {
+        fav.setImageResource(R.drawable.ic_favorite_black_24dp);
+    }
+
+    @Override
+    public void removeFromFavourite() {
+        fav.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+    }
+
+    @Override
+    public void markFavourite(boolean favourite) {
+        if (favourite) {
+            fav.setImageResource(R.drawable.ic_favorite_black_24dp);
         }
     }
 
@@ -83,27 +96,12 @@ public class DetailsFragment extends Fragment {
         if (isImageFitToScreen) {
             isImageFitToScreen = false;
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT, H));
+                    RelativeLayout.LayoutParams.MATCH_PARENT, HEIGHT));
         } else {
             isImageFitToScreen = true;
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
                     .MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
-    }
-
-    private void favouritesHandler() {
-        if (!mPrefs.contains(cards.getId())) {
-            fav.setImageResource(R.drawable.ic_favorite_black_24dp);
-            mPrefs.edit().putString(cards.getId(), new Gson().toJson(cards)).commit();
-        } else {
-            fav.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-            mPrefs.edit().remove(cards.getId()).commit();
-        }
-    }
-
-    private void isFavourite() {
-        if (mPrefs.contains(cards.getId()))
-            fav.setImageResource(R.drawable.ic_favorite_black_24dp);
     }
 }

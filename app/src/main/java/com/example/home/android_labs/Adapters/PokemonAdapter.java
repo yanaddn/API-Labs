@@ -1,7 +1,6 @@
 package com.example.home.android_labs.Adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,26 +9,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.home.android_labs.ApplicationEx;
 import com.example.home.android_labs.Entity.Card;
-import com.example.home.android_labs.Fragments.DetailsFragment;
-import com.example.home.android_labs.MainActivity;
 import com.example.home.android_labs.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.example.home.android_labs.MainActivity.DETAILS;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHolder>  {
 
     private List<Card> cards;
     private Context mContext;
-
 
     public PokemonAdapter(Context context, List<Card> cards) {
         mContext = context;
@@ -57,17 +50,13 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.userName.setText(cards.get(position).getName());
-        //holder.tags.setText(cards.get(position).getId());
         Picasso.get().load(cards.get(position).getImageUrl()).into(holder.imageView);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DetailsFragment fragment = new DetailsFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(DETAILS, new Gson().toJson(cards.get(position)));
-                fragment.setArguments(bundle);
-                ((MainActivity) v.getContext()).setFragment(fragment);
+                ApplicationEx mApplication = (ApplicationEx) mContext.getApplicationContext();
+                mApplication.getFragmentHandler().goToDetails(cards.get(position));
             }
         });
     }
@@ -83,8 +72,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         ImageView imageView;
         @BindView(R.id.user)
         TextView userName;
-        //@BindView(R.id.tags)
-        //TextView tags;
         @BindView(R.id.parent_layout)
         LinearLayout parentLayout;
 

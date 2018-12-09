@@ -1,8 +1,5 @@
 package com.example.home.android_labs.Fragments;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,54 +10,49 @@ import android.view.ViewGroup;
 
 import com.example.home.android_labs.Adapters.PokemonAdapter;
 import com.example.home.android_labs.Entity.Card;
+import com.example.home.android_labs.Presenters.FavouritesPresenter;
+import com.example.home.android_labs.Presenters.FavouritesPresenterImpl;
 import com.example.home.android_labs.R;
-import com.google.gson.Gson;
+import com.example.home.android_labs.Views.FavouritesView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.home.android_labs.MainActivity.FAVOURITES;
-
-public class FavouritesFragment extends Fragment {
+public class FavouritesFragment extends Fragment implements FavouritesView {
 
     private PokemonAdapter mAdapter;
-    private List<Card> cards;
-    private SharedPreferences mPrefs;
+    private FavouritesPresenter presenter;
 
     @BindView(R.id.lvMain)
-    RecyclerView mRecycleView;
+    protected RecyclerView mRecycleView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_favourites, container, false);
         ButterKnife.bind(this, view);
-        cards = new ArrayList<>();
-        getFavourites();
-        setmAdapter(cards, mAdapter, mRecycleView, getActivity());
+        presenter = new FavouritesPresenterImpl(this);
+        initializeRecyclerView();
         return view;
     }
 
-    private void getFavourites() {
-        mPrefs = getActivity().getSharedPreferences(FAVOURITES, Context.MODE_PRIVATE);
-        Map<String, ?> map = mPrefs.getAll();
-
-        for (Map.Entry<String, ?> entry : map.entrySet()) {
-            Card card = new Gson().fromJson(entry.getValue().toString(), Card.class);
-            cards.add(card);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.requestDataFromStorage(getActivity());
     }
 
-    public void setmAdapter(List<Card> cards, PokemonAdapter adapter,
-                            RecyclerView recyclerView, Activity activity) {
-        adapter = new PokemonAdapter(activity, cards);
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(activity);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+    private void initializeRecyclerView() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mRecycleView.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void setDataToRecyclerView(List<Card> cards) {
+        mAdapter = new PokemonAdapter(getActivity(), cards);
+        mRecycleView.setAdapter(mAdapter);
     }
 }
+
