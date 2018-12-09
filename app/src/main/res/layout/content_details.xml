@@ -92,7 +92,7 @@
         android:paddingLeft="20dp"
         android:textColor="@color/colorPrimary"
         android:layout_marginBottom="5dp"
-        android:textSize="18dp" />
+        android:textSize="18dp"/>
 
     <View
         android:id="@+id/tags_view"
@@ -125,78 +125,4 @@
         android:textColor="@color/colorPrimary"
         android:layout_marginBottom="5dp"
         android:textSize="18dp" />
-
-    <View
-        android:id="@+id/type_view"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineColor"
-        android:layout_below="@+id/type_details"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"/>
-
-    <TextView
-        android:id="@+id/views_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/type_view"
-        android:textColor="@color/itemName"
-        android:paddingLeft="20dp"
-        android:layout_marginBottom="2dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="@string/views"/>
-
-    <TextView
-        android:id="@+id/views_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/views_name"
-        android:paddingLeft="20dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginBottom="5dp"
-        android:textSize="18dp" />
-
-    <View
-        android:id="@+id/views_view"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineColor"
-        android:layout_below="@+id/views_details"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"/>
-
-    <TextView
-        android:id="@+id/favourites_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/views_view"
-        android:textColor="@color/itemName"
-        android:paddingLeft="20dp"
-        android:layout_marginBottom="2dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="@string/favourites"/>
-
-    <TextView
-        android:id="@+id/favourites_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/favourites_name"
-        android:paddingLeft="20dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginBottom="5dp"
-        android:textSize="18dp" />
-
-    <View
-        android:id="@+id/favourites_view"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineColor"
-        android:layout_below="@+id/favourites_details"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"/>
 </RelativeLayout>

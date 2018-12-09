@@ -36,10 +36,10 @@ public class DetailsFragment extends Fragment {
     TextView tags;
     @BindView(R.id.type_details)
     TextView type;
-    @BindView(R.id.views_details)
-    TextView views;
-    @BindView(R.id.favourites_details)
-    TextView favourites;
+    //@BindView(R.id.views_details)
+    //TextView views;
+    //@BindView(R.id.favourites_details)
+    //TextView favourites;
     @BindView(R.id.fav)
     ImageView fav;
 

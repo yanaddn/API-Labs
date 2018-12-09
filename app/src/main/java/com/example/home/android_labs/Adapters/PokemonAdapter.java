@@ -56,8 +56,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.userName.setText(cards.get(position).getId());
-        holder.tags.setText(cards.get(position).getName());
+        holder.userName.setText(cards.get(position).getName());
+        //holder.tags.setText(cards.get(position).getId());
         Picasso.get().load(cards.get(position).getImageUrl()).into(holder.imageView);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +83,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         ImageView imageView;
         @BindView(R.id.user)
         TextView userName;
-        @BindView(R.id.tags)
-        TextView tags;
+        //@BindView(R.id.tags)
+        //TextView tags;
         @BindView(R.id.parent_layout)
         LinearLayout parentLayout;
 
